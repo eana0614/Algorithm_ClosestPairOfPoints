@@ -22,10 +22,10 @@ public class ClosestPoint {
 			
 			readPoint = readInputFile(filePath);
 			
-			//x 기분 정렬
+			//Sort x-coordinate
 			readPoint = pqs.pointQuickSort(readPoint, true);
 			
-			double shortDistance = findclosestPoint(readPoint, arrayLength);
+			double shortDistance = closestPoint(readPoint, 0, arrayLength);
 			
 			System.out.println("거리 = "+shortDistance);
 			System.out.println("DONE");
@@ -37,48 +37,52 @@ public class ClosestPoint {
 
 	}
 
-	private static double findclosestPoint(Point[] p, int n) {
-		int mid_x = n/2;
+	private static double closestPoint(Point[] p, int s, int n) {
 		
-   		if(n <= 8 ){
-			return bruteForce(p, n);
+		//Compute
+		int midline = (n+s)/2;
+		
+   		if(n-s <= 8){
+			return bruteForce(p, s, n);
 		}
 		
-		double dLeft = findclosestPoint(p, mid_x);
-		double dRight = findclosestPoint(p, n-mid_x);
+		double dLeft = closestPoint(p, s, midline);
+		double dRight = closestPoint(p, midline+1, n);
 		
 		double dis = Math.min(dLeft, dRight);
 		
 		
-		Point[] tt = new Point[ n];
-		int j =0;
-		for(int i=0; i<n; i++){
-			double tempDis = Math.abs(p[i].x_point - p[mid_x].x_point);
-			if(tempDis < dis){
-				tt[j] = p[i];
+		//Delete
+		Point[] linePoint = new Point[n];
+		int j=0;
+		for(int i=s; i<n; i++){
+			double temp = Math.abs(p[i].x_point - p[midline].x_point);
+			if(temp < dis){
+				linePoint[j] = p[i];
 				j++;
 			}
 		}
+	
+		//Sort y-coordinate
+		linePoint = removeNULLValue(linePoint, j);
+		linePoint = pqs.pointQuickSort(linePoint, false);
 		
+		//Scan
+		double scanValue = scanPoint(linePoint, dis);
 		
-		return Math.min(dis, closestTT(tt, j, dis));
+		return Math.min(dis, scanValue);
 	}
 	
-	private static double closestTT(Point[] tt, int size, double dis) {
+	private static double scanPoint(Point[] linePoint, double dis) {
 		double min = dis;
-		
-		Point[] reArray = removeNULLValue(tt, size);
-		
-		tt = pqs.pointQuickSort(reArray, false);
-		
-		for(int i=0; i<size; i++){
-			for(int j=i+1; j<size && (tt[j].y_point - tt[i].y_point) < min; ++j){
-				if(distance(tt[i], tt[j]) < min){
-					min = distance(tt[i], tt[j]);
+				
+		for(int i=0; i<linePoint.length; i++){
+			for(int j=i+1; j <linePoint.length && (linePoint[j].y_point - linePoint[i].y_point) < min ; j++){
+				if(distance(linePoint[i], linePoint[j]) < min){
+					min = distance(linePoint[i], linePoint[j]);
 				}
 			}
 		}
-		
 		return min;
 	}
 
@@ -98,11 +102,11 @@ public class ClosestPoint {
 		return Math.sqrt(Math.pow(tempX, 2)+Math.pow(tempY, 2));
 	}
 
-	private static double bruteForce(Point[] p, int n){
+	private static double bruteForce(Point[] p, int s, int n){
 		double min = MAXDis;
 		double d;
 		
-		for(int i=0; i<n; ++i){
+		for(int i=s; i<n; ++i){
 			for(int j=i+1; j<n; ++j){
 				d = distance(p[i], p[j]);
 				if(d < min){
