@@ -1,0 +1,9 @@
+﻿  closestPoints.c
+c:\users\eana0614\documents\visual studio 2015\projects\closestpairofpoints\closestpairofpoints\closestpoints.c(58): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\eana0614\documents\visual studio 2015\projects\closestpairofpoints\closestpairofpoints\closestpoints.c(40): warning C4101: 'midP' :참조되지 않은 지역 변수입니다.
+c:\users\eana0614\documents\visual studio 2015\projects\closestpairofpoints\closestpairofpoints\closestpoints.c(77): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\eana0614\documents\visual studio 2015\projects\closestpairofpoints\closestpairofpoints\closestpoints.c(141): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\eana0614\documents\visual studio 2015\projects\closestpairofpoints\closestpairofpoints\closestpoints.c(142): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\eana0614\documents\visual studio 2015\projects\closestpairofpoints\closestpairofpoints\closestpoints.c(144): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ClosestPairOfPoints.vcxproj -> C:\Users\eana0614\documents\visual studio 2015\Projects\ClosestPairOfPoints\Debug\ClosestPairOfPoints.exe
+  ClosestPairOfPoints.vcxproj -> C:\Users\eana0614\documents\visual studio 2015\Projects\ClosestPairOfPoints\Debug\ClosestPairOfPoints.pdb (Full PDB)
